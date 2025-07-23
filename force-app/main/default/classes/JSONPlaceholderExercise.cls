@@ -1,6 +1,11 @@
 public class JSONPlaceholderExercise {
     private static final String BASE_URL = 'https://jsonplaceholder.typicode.com';
-    
+    private static final String GET_METHOD = 'GET';
+    private static final String POST_METHOD = 'POST';
+    private static final String PUT_METHOD = 'PUT';
+    private static final String PATCH_METHOD = 'PATCH';
+    private static final String DELETE_METHOD = 'DELETE';
+    private static final String URL_END = '/posts/';
     /**
      * Exercise 1: Implement a GET request to fetch a post by ID
      * Endpoint: /posts/{postId}
@@ -14,7 +19,14 @@ public class JSONPlaceholderExercise {
         // 3. Set the HTTP method to 'GET'
         // 4. Send the request and get the response
         // 5. Return the response body as string
-        return null;
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(BASE_URL + '/post/' + postId);
+        req.setMethod(GET_METHOD);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        String resBody = res.getBody();
+        return resBody;
+
     }
     
     /**
@@ -34,7 +46,19 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        return null;
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(BASE_URL + '/posts');
+        req.setMethod(POST_METHOD);
+        String reqBody = JSON.serialize(body);
+        req.setBody(reqBody);
+        req.setHeader('title', title);
+        String userIdString = String.valueOf(userId);
+        req.setHeader('userId', userIdString);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        String resBody = res.getBody();
+        return resBody;
+
     }
     
     /**
@@ -55,7 +79,17 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        return null;
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(BASE_URL + URL_END + '{' + postId +'}');
+        req.setMethod(PUT_METHOD);
+        String reqBody = JSON.serialize(body);
+        String userIdString = String.valueOf(userId);
+        req.setBody(reqBody);
+        req.setHeader('userId', userIdString);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        String resBody = res.getBody();
+        return resBody;
     }
     
     /**
@@ -74,7 +108,16 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        return null;
+        HttpRequest req = new HttpRequest();
+        String postIdString = String.valueOf(postId);
+        req.setEndpoint(BASE_URL + URL_END + postIdString);
+        String reqBody = JSON.serialize(title);
+        req.setBody(reqBody);
+        req.setMethod(PATCH_METHOD);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        String resBody = res.getBody();
+        return resBody;
     }
     
     /**
@@ -90,6 +133,13 @@ public class JSONPlaceholderExercise {
         // 3. Set the HTTP method to 'DELETE'
         // 4. Send the request and get the response
         // 5. Return the response status code
-        return null;
+        HttpRequest req = new HttpRequest();
+        String postIdString = String.valueOf(postId);
+        req.setEndpoint(BASE_URL + URL_END + postIdString);
+        req.setMethod(DELETE_METHOD);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        Integer resStatusCode = res.getStatusCode();
+        return resStatusCode;
     }
 } 

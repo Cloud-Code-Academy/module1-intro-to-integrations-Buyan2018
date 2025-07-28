@@ -19,14 +19,7 @@ public class JSONPlaceholderExercise {
         // 3. Set the HTTP method to 'GET'
         // 4. Send the request and get the response
         // 5. Return the response body as string
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(BASE_URL + URL_END + postId);
-        req.setMethod(GET_METHOD);
-        Http http = new Http();
-        HttpResponse res = http.send(req);
-        String resBody = res.getBody();
-        return resBody;
-
+        return null;
     }
     
     /**
@@ -46,19 +39,6 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(BASE_URL + URL_END);
-        req.setMethod(POST_METHOD);
-        String reqBody = JSON.serialize(body);
-        req.setBody(reqBody);
-        req.setHeader('title', title);
-        String userIdString = String.valueOf(userId);
-        req.setHeader('userId', userIdString);
-        Http http = new Http();
-        HttpResponse res = http.send(req);
-        String resBody = res.getBody();
-        return resBody;
-
     }
     
     /**
